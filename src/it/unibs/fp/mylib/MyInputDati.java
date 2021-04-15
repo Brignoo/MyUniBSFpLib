@@ -14,9 +14,11 @@ public class MyInputDati {
 	  private final static String ERRORE_MASSIMO = "ATTENZIONE: e' richiesto un valore minore o uguale a ";
 	  private final static String ERRORE_DATA_COMPRESA = "ATTENZIONE: l'età deve essere compresa tra %i e %i \n\n";
 	  private final static String ERRORE_STRINGA_NON_ALFANUMERICA = "ATTENZIONE: è necessario inserire una stringa contentente almeno un carattere alfanumerico";
+	  private final static String ERRORE_STRINGA_NON_ALFABETICA = "ATTENZIONE: è necessario inserire una stringa contentente solo caratteri alfabetici";
 	  private final static String MESSAGGIO_AMMISSIBILI = "ATTENZIONE: i caratteri ammissibili sono: ";
 	  private final static String MESSAGGIO_FORMATO = "Il formato ammissibile è %s:";
 	  private static final String ALFANUMERICO = "abcdefghijklmnopqrstuvwxyzABCDEFGHILMNOPQRSTUVWXYZ124567890";
+	  private static final String ALFABETICO = "abcdefghijklmnopqrstuvwxyzABCDEFGHILMNOPQRSTUVWXYZ";
 
 	  private final static char RISPOSTA_SI='S';
 	  private final static char RISPOSTA_NO='N';
@@ -59,7 +61,7 @@ public class MyInputDati {
 		  return lettura;
 	  }
 	  
-	  public static String leggiStringaAlfaNumerica(String messaggio){
+	  public static String leggiStringa( String messaggio, String CONSTRAINT, String ERRORE ) {
 		  
 		  boolean finito=false;
 		  String lettura = null, lettura1 = null;
@@ -76,13 +78,13 @@ public class MyInputDati {
 			  }
 			  else {
 				  
-				  System.out.println(ERRORE_STRINGA_VUOTA);
+				  System.out.println(ERRORE);
 				  finito=false;
 			  }
 			  
-			  for ( int i = 0; i < ALFANUMERICO.length(); i++ ) {
+			  for ( int i = 0; i < CONSTRAINT.length(); i++ ) {
 				  
-				  String confronto = "" + ALFANUMERICO.charAt(i);
+				  String confronto = "" + CONSTRAINT.charAt(i);
 				  
 				  if( lettura1.contains(confronto) ) {
 					  count ++;
@@ -91,7 +93,7 @@ public class MyInputDati {
 			  
 			  if (count <= 0) {
 				  
-				  System.out.println(ERRORE_STRINGA_NON_ALFANUMERICA);
+				  System.out.println(ERRORE);
 				  finito=false;
 			  }
 			  else {
@@ -100,9 +102,23 @@ public class MyInputDati {
 			  }
 		  }
 		  while(!finito);
-
+		  
 		  return lettura;
-	  	}
+	  }
+	  
+	  public static String leggiStringaAlfaNumerica(String messaggio){
+		  
+		  String lettura = leggiStringa(messaggio, ALFANUMERICO, ERRORE_STRINGA_NON_ALFANUMERICA);
+		  
+		  return lettura;
+	  }
+	  
+	  public static String leggiStringaAlfabetica(String messaggio){
+		  
+		  String lettura = leggiStringa(messaggio, ALFABETICO, ERRORE_STRINGA_NON_ALFABETICA);
+		  
+		  return lettura;
+	  }
 	  
 	  public static char leggiChar (String messaggio) {
 		  
