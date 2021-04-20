@@ -3,22 +3,21 @@ public class BelleStringhe
 {
 
  private final static String SPAZIO = " ";
- private final static String CORNICE = "---------------------------------------------------";
+ private final static String CORNICE = "═════════════════════════════════";
  private final static String ACAPO = "\n";
 
 
 
- public static String incornicia (String s)
-	{ 
-	 StringBuffer res = new StringBuffer();
+ 	public static String incornicia (String s) { 
+ 		
+ 		StringBuffer res = new StringBuffer();
 		
-	 res.append(CORNICE+ACAPO);
-	 res.append(s+ACAPO);
-	 res.append(CORNICE+ACAPO);
+ 		res.append(CORNICE+ACAPO);
+ 		res.append(s+ACAPO);
+ 		res.append(CORNICE+ACAPO);
 
- 	 return res.toString();
-
-  }
+ 		return res.toString();
+ 	}
 
  
  public static String incolonna (String s, int larghezza)
