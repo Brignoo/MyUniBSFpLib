@@ -8,11 +8,12 @@ Si suppone che la voce per uscire sia sempre associata alla scelta 0
 e sia presentata in fondo al menu
 
 */
+
 public class MyMenu {
 	
-	final private static String CORNICE_SUPERIORE = "╔═══════════════════════════════╗";
+	final private static String CORNICE_SUPERIORE = "╔════════════════════════════════╗";
 	final private static String CORNICE_VERTICALE = "║";
-	final private static String CORNICE_INFERIORE = "╚═══════════════════════════════╝";
+	final private static String CORNICE_INFERIORE = "╚════════════════════════════════╝";
 	final private static String VOCE_USCITA = "0\tEsci";				
 	final private static String RICHIESTA_INSERIMENTO = "Digita il numero dell'opzione desiderata > ";
 	
