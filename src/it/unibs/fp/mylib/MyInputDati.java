@@ -4,6 +4,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+*<p>
+* La classe <strong>MyInputDati</strong> è un'ampliamento della classe base InputDati  
+* permette di eseguire l'operazione di input, semplificando la struttura del main.
+* Contiene metodi utili per i diversi tipi di dato
+* </p>
+* 
+*/
 public class MyInputDati {
 	
 	  private static Scanner lettore = creaScanner();
@@ -23,96 +31,122 @@ public class MyInputDati {
 	  private final static char RISPOSTA_SI='S';
 	  private final static char RISPOSTA_NO='N';
  
-	  private static Scanner creaScanner () {
+	 /** Metodo per la creazione dello Scanner da utilizzare per l'input dati
+	 * @return Ritorna lo Scanner creato
+	 */
+	private static Scanner creaScanner () {
 		  
-		  Scanner creato = new Scanner(System.in);
-		  creato.useDelimiter(System.getProperty("line.separator"));
+		Scanner creato = new Scanner(System.in);
+		creato.useDelimiter(System.getProperty("line.separator"));
 		  
-		  return creato;
+		return creato;
 	  }
 	  
-	  public static String leggiStringa (String messaggio) {
+	/** Metodo per la lettura delle stringhe
+	* @param Messaggio Messaggio da proporre in output prima di eseguire l'input
+	* @return Ritorna la stringa letta
+	*/
+	public static String leggiStringa (String messaggio) {
 		  
-		  System.out.print(messaggio);
-		  return lettore.next();
-	  }
+		System.out.print(messaggio);
+		return lettore.next();
+	}
 	  
-	  public static String leggiStringaNonVuota(String messaggio) {
+	/** Metodo per la lettura di una stringa non vuota
+	 * @param messaggio Messaggio da proporre in output prima di eseguire l'input
+	 * @return Ritorna la stringa letta
+	 */
+	public static String leggiStringaNonVuota(String messaggio) {
 		  
-		  boolean finito=false;
-		  String lettura = null;
-
-		  do {
-
-			  lettura = leggiStringa(messaggio);
-			  lettura = lettura.trim();
+		boolean finito=false;
+		String lettura = null;
+	
+		do {
+	
+			lettura = leggiStringa(messaggio);
+			lettura = lettura.trim();
 			  
-			  if (lettura.length() > 0) {
+			if (lettura.length() > 0) {
 				  
-				  finito=true;
-			  }
-			  else {
+				finito=true;
+			}
+			else {
 				  
-				  System.out.println(ERRORE_STRINGA_VUOTA);
-			  }
-		  } 
-		  while (!finito);
+				System.out.println(ERRORE_STRINGA_VUOTA);
+			}
+		} 
+		while (!finito);
 	   
 		  return lettura;
-	  }
+	}
 	  
-	  public static String leggiStringa( String messaggio, String CONSTRAINT, String ERRORE ) {
+	  /** Metodo per la lettura di una stringa controllando i suoi componenti rispetto ad una stringa di riferimento
+	 * @param messaggio Messaggio da proporre in output prima di eseguire l'input
+	 * @param CONSTRAINT Stringa di riferimento con cui effettuare il controllo
+	 * @param ERRORE Stringa da stampare in caso di problemi con il dato inserito
+	 * @return Ritorna la stringa letta
+	 */
+	public static String leggiStringa( String messaggio, String CONSTRAINT, String ERRORE ) {
 		  
-		  boolean finito=false;
-		  String lettura = null, lettura1 = null;
-		  int count = 0;
-
-		  do{
+		boolean finito=false;
+		String lettura = null, lettura1 = null;
+		int count = 0;
+	
+		do{
 			  
-			  lettura1 = leggiStringa(messaggio);
-			  lettura = lettura1.trim();
-			  
-			  if (lettura.length() > 0) {
-				  
-				  finito=true;
-			  }
-			  else {
-				  
-				  System.out.println(ERRORE);
-				  finito=false;
-			  }
-			  
-			  for ( int i = 0; i < CONSTRAINT.length(); i++ ) {
-				  
-				  String confronto = "" + CONSTRAINT.charAt(i);
-				  
-				  if( lettura1.contains(confronto) ) {
-					  count ++;
-				  }
-			  }
-			  
-			  if (count <= 0) {
-				  
-				  System.out.println(ERRORE);
-				  finito=false;
-			  }
-			  else {
-				  
-				  finito=true;
-			  }
-		  }
-		  while(!finito);
+			lettura1 = leggiStringa(messaggio);
+			lettura = lettura1.trim();
 		  
-		  return lettura;
-	  }
+			if (lettura.length() > 0) {
+			  
+				finito=true;
+			}
+			else {
+			  
+				System.out.println(ERRORE);
+			  	finito=false;
+			}
+		  
+			for ( int i = 0; i < CONSTRAINT.length(); i++ ) {
+			  
+				String confronto = "" + CONSTRAINT.charAt(i);
+			  
+				if( lettura1.contains(confronto) ) {
+					count ++;
+				}
+			}
+		  
+			if (count <= 0) {
+			  
+				System.out.println(ERRORE);
+			  	finito=false;
+			}
+			else {
+			  
+				finito=true;
+			}
+		}
+		while(!finito);
+		  
+			
+		return lettura;
+	}
 	  
-	  public static String leggiStringaAlfaNumerica(String messaggio){
+	  /** Metodo per l'inserimento di una stringa alfanumerica
+	 * @param messaggio Messaggio da proporre in output prima di eseguire l'input
+	 * @return Ritorna la stringa letta
+	 */
+	public static String leggiStringaAlfaNumerica(String messaggio){
 		  
 		  String lettura = leggiStringa(messaggio, ALFANUMERICO, ERRORE_STRINGA_NON_ALFANUMERICA);
 		  
 		  return lettura;
 	  }
 	  
+	/** Metodo per l'inserimento di una stringa alfabetica
+	 * @param messaggio Messaggio da proporre in output prima di eseguire l'input
+	 * @return Ritorna la stringa letta
+	 */
 	  public static String leggiStringaAlfabetica(String messaggio){
 		  
 		  String lettura = leggiStringa(messaggio, ALFABETICO, ERRORE_STRINGA_NON_ALFABETICA);
@@ -120,7 +154,12 @@ public class MyInputDati {
 		  return lettura;
 	  }
 	  
-	  public static char leggiChar (String messaggio) {
+	  
+	  /** Metodo per la lettura di un char
+	 * @param messaggio Messaggio da proporre in output prima di eseguire l'input
+	 * @return Ritorna il char letto
+	 */
+	public static char leggiChar (String messaggio) {
 		  
 		  boolean finito = false;
 		  char valoreLetto = '\0';
@@ -145,7 +184,12 @@ public class MyInputDati {
 		  return valoreLetto;
 	  }
 	  
-	  public static char leggiUpperChar (String messaggio, String ammissibili) {
+	  /** Metodo per la lettura di un char dato un vincolo specificato (esegue la conversione a char maiuscoli)
+	 * @param messaggio Messaggio da proporre in output prima di eseguire l'input
+	 * @param ammissibili Stringa contenente i caratteri ammissibili
+	 * @return Ritorna il char letto
+	 */
+	public static char leggiUpperChar(String messaggio, String ammissibili) {
 		  
 		  boolean finito = false;
 		  char valoreLetto = '\0';
@@ -168,32 +212,14 @@ public class MyInputDati {
 		  return valoreLetto;
 	  }
 	  
-	  public static int leggiIntero (String messaggio) {
-		  
-		  boolean finito = false;
-		  int valoreLetto = 0;
-	   
-		  do{
-			  
-			  System.out.print(messaggio);
-	     
-			  try {
-				  
-				  valoreLetto = lettore.nextInt();
-				  finito = true;
-			  }
-			  catch (InputMismatchException e) {
-	       
-				  System.out.println(ERRORE_FORMATO);
-				  String daButtare = lettore.next();
-			  }
-		  } 
-		  while (!finito);
-		  
-		  return valoreLetto;
-	  }
-	  
-	  public static Date leggiDataControllo(String messaggio, String formato, int minimo, int massimo) {
+	  /** Metodo per la lettura di una data con controllo sull'anno
+	 * @param messaggio Messaggio da proporre in output prima di eseguire l'input
+	 * @param formato Specificatore del formato della data utilizzato
+	 * @param minimo Anno minimo
+	 * @param massimo Anno massimo
+	 * @return Ritorna la data letta
+	 */
+	public static Date leggiDataControllo(String messaggio, String formato, int minimo, int massimo) {
 		  
 		  Date data;
 		  int flag = 0;
@@ -216,7 +242,12 @@ public class MyInputDati {
 		  return data;
 	  }
 	  
-	  public static Date leggiData(String messaggio, String formato) {
+	  /** Metodo per la lettura di una data dato il solo formato
+	 * @param messaggio Messaggio da proporre in output prima di eseguire l'input
+	 * @param formato Specificatore del formato della data utilizzato
+	 * @return Ritorna la data letta
+	 */
+	public static Date leggiData(String messaggio, String formato) {
 		  
 		  Date data = null;
 		  DateFormat datef = new SimpleDateFormat(formato);
@@ -245,38 +276,43 @@ public class MyInputDati {
 	       
 	      return data;
 	  }
-
-	  public static int leggiInteroPositivo(String messaggio){
-		  
-		  return leggiInteroConMinimo(messaggio,1);
-	  }
-	  
-	  public static int leggiInteroNonNegativo(String messaggio){
-		  
-		  return leggiInteroConMinimo(messaggio,0);
-	  }
-	  
-	  public static int leggiInteroConMinimo(String messaggio, int minimo){
+	
+	  /** Metodo per la lettura di un intero
+	 * @param messaggio Messaggio da proporre in output prima di eseguire l'input
+	 * @return Ritorna l'intero letto
+	 */
+	public static int leggiIntero (String messaggio) {
 		  
 		  boolean finito = false;
 		  int valoreLetto = 0;
-		  
-		  do {
-			  valoreLetto = leggiIntero(messaggio);
+	   
+		  do{
 			  
-			  if (valoreLetto >= minimo) {
+			  System.out.print(messaggio);
+	     
+			  try {
+				  
+				  valoreLetto = lettore.nextInt();
 				  finito = true;
 			  }
-			  else {
-				  System.out.println(ERRORE_MINIMO + minimo);
+			  catch (InputMismatchException e) {
+	       
+				  System.out.println(ERRORE_FORMATO);
+				  String daButtare = lettore.next();
 			  }
-		  }
+		  } 
 		  while (!finito);
-	     
+		  
 		  return valoreLetto;
-	  	}
-
-	  public static int leggiIntero(String messaggio, int minimo, int massimo) {
+	  }
+	
+	  /** Metodo per la lettura di un intero dato un intervallo di riferimento
+	 * @param messaggio Messaggio da proporre in output prima di eseguire l'input
+	 * @param minimo Minimo di riferimento
+	 * @param massimo Massimo di riferimento
+	 * @return Ritorna l'intero letto
+	 */
+	public static int leggiIntero(String messaggio, int minimo, int massimo) {
 		  
 		  boolean finito = false;
 		  int valoreLetto = 0;
@@ -304,8 +340,55 @@ public class MyInputDati {
 	     
 		  return valoreLetto;
 	  	}
+	
+	/** Metodo per la lettura di un intero con un minimo
+	 * @param messaggio Messaggio da proporre in output prima di eseguire l'input
+	 * @param minimo Minimo di riferimento
+	 * @return Ritorna l'intero letto
+	 */
+	public static int leggiInteroConMinimo(String messaggio, int minimo){
+		  
+		  boolean finito = false;
+		  int valoreLetto = 0;
+		  
+		  do {
+			  valoreLetto = leggiIntero(messaggio);
+			  
+			  if (valoreLetto >= minimo) {
+				  finito = true;
+			  }
+			  else {
+				  System.out.println(ERRORE_MINIMO + minimo);
+			  }
+		  }
+		  while (!finito);
+	     
+		  return valoreLetto;
+	  	}
+	
+	  /** Metodo per la lettura di un intero positivo
+	 * @param messaggio Messaggio da proporre in output prima di eseguire l'input
+	 * @return Ritorna l'intero letto
+	 */
+	public static int leggiInteroPositivo(String messaggio){
+		  
+		  return leggiInteroConMinimo(messaggio,1);
+	  }
 	  
-	  public static double leggiDouble (String messaggio) {
+	  /** Metodo per la lettura di un intero non negativo
+	 * @param messaggio Messaggio da proporre in output prima di eseguire l'input
+	 * @return Ritorna l'intero letto
+	 */
+	public static int leggiInteroNonNegativo(String messaggio){
+		  
+		  return leggiInteroConMinimo(messaggio,0);
+	  }
+	  
+	  /** Metodo per la lettura di un double
+	 * @param messaggio Messaggio da proporre in output prima di eseguire l'input
+	 * @return Ritorna il double letto
+	 */
+	public static double leggiDouble (String messaggio) {
 		  
 		  boolean finito = false;
 		  double valoreLetto = 0;
@@ -330,7 +413,12 @@ public class MyInputDati {
 		  return valoreLetto;
 	  }
 	 
-	  public static double leggiDoubleConMinimo (String messaggio, double minimo){
+	  /** Metodo per la lettura di un double con un minimo
+	 * @param messaggio Messaggio da proporre in output prima di eseguire l'input
+	 * @param minimo Minimo di riferimento
+	 * @return Ritorna il double letto
+	 */
+	public static double leggiDoubleConMinimo (String messaggio, double minimo){
 		  
 		  boolean finito = false;
 		  double valoreLetto = 0;
@@ -352,19 +440,23 @@ public class MyInputDati {
 	     
 		  return valoreLetto;
 	  }
-
-	  public static boolean yesOrNo(String messaggio) {
+	
+	  /** Metodo per chiedere all'utente di rispondere in modo affermetivo o nevativo ad una domanda
+	 * @param messaggio Messaggio da proporre in output prima di eseguire l'input
+	 * @return Ritorna il valore boolean scelto dall'utente
+	 */
+	public static boolean yesOrNo(String messaggio) {
 		  
 		  String mioMessaggio = messaggio + "("+RISPOSTA_SI+"/"+RISPOSTA_NO+")";
-		  char valoreLetto = leggiUpperChar(mioMessaggio,String.valueOf(RISPOSTA_SI)+String.valueOf(RISPOSTA_NO));
-		  
-		  if (valoreLetto == RISPOSTA_SI) {
+			  char valoreLetto = leggiUpperChar(mioMessaggio,String.valueOf(RISPOSTA_SI)+String.valueOf(RISPOSTA_NO));
 			  
-			return true;
+			  if (valoreLetto == RISPOSTA_SI) {
+				  
+				return true;
+			  }
+			  else {
+				  
+				return false;
+			  }
 		  }
-		  else {
-			  
-			return false;
-		  }
-	  }
 }

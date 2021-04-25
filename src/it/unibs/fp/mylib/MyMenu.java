@@ -2,18 +2,20 @@ package it.unibs.fp.mylib;
 
 import java.io.IOException;
 
-/*
-Questa classe rappresenta un menu testuale generico a piu' voci
-Si suppone che la voce per uscire sia sempre associata alla scelta 0 
-e sia presentata in fondo al menu
-
+/**
+*<p>
+* La classe <strong>MyMenu</strong> permette di utilizzare un menu testuale
+* semplice per l'interazione con l'utente, implementato metodi utili per la
+* presentazione a video 
+* </p>
+* 
 */
 
 public class MyMenu {
 	
-	final private static String CORNICE_SUPERIORE = "╔════════════════════════════════╗";
-	final private static String CORNICE_VERTICALE = "║";
-	final private static String CORNICE_INFERIORE = "╚════════════════════════════════╝";
+	final private static String CORNICE_SUPERIORE = "------------------------------------------";
+	final private static String CORNICE_VERTICALE = "|";
+	final private static String CORNICE_INFERIORE = "------------------------------------------";
 	final private static String VOCE_USCITA = "0\tEsci";				
 	final private static String RICHIESTA_INSERIMENTO = "Digita il numero dell'opzione desiderata > ";
 	
@@ -21,12 +23,19 @@ public class MyMenu {
 	private String [] voci;
 	private int lunghezza;
 		
+	/** Costruttore per un generico menu
+	 * @param titolo Titolo da utilizzare nella visualizzazione
+	 * @param voci Array contenente tutte le possibili scelte dell'utente
+	 */
 	public MyMenu (String titolo, String [] voci){
 		  
 		this.titolo = titolo;
 		this.voci = voci;
 	}
 
+	/** Metodo per la scelta dell'operazione da eseguire
+	 * @return Ritorna l'intero scelto dall'utente
+	 */
 	public int scegli (){
 	  
 		stampaMenu();
@@ -34,11 +43,17 @@ public class MyMenu {
 		return InputDati.leggiIntero(RICHIESTA_INSERIMENTO, 0, voci.length);	 
 	}
 	
+	/** Metodo per il calcolo della lunghezza della cornice del menu
+	 * 
+	 */
 	private void calcolaLunghezza() {
 		
 		lunghezza = CORNICE_SUPERIORE.length() - titolo.length() - 2;
 	}
 	
+	/** Metodo per bloccare l'esecuzione per un numero dato di millisecondi (utile per rendere più chiara la presentazione a video)
+	 * @param millisecondi Durata della pausa in millisecondi
+	 */
 	public static void wait(int millisecondi) {
 	    
 		try {
@@ -48,6 +63,9 @@ public class MyMenu {
 	    }
 	}
 	
+	/** Metodo per stampare la cornice del menu
+	 * 
+	 */
 	private void cornice() {
 		
 		int i;
@@ -72,6 +90,9 @@ public class MyMenu {
 		
 	}
 		
+	/** Metodo di stampa del menu
+	 * 
+	 */
 	public void stampaMenu (){
 		
 		calcolaLunghezza();
