@@ -10,7 +10,7 @@ package it.unibs.fp.mylib;
 public class BelleStringhe {
 
  private final static String SPAZIO = " ";
-private final static String CORNICE = "-----------------------------------------";
+ private final static String CORNICE = "------------------------------------------";
  private final static String ACAPO = "\n";
 
  	/** Metodo per incorniciare una stringa data
@@ -73,6 +73,15 @@ private final static String CORNICE = "-----------------------------------------
 		 }
 
 		 return res.toString();
+	}
+ 	
+ 	/** Metodo per centrare una stringa in uno spazio di lunghezza nota
+ 	 * @param s Stringa di partenza
+ 	 * @return Stringa centrata rispetto alla lunghezza della cornice
+ 	 */
+ 	public static String centrata (String s) {
+
+		 return centrata(s, CORNICE.length());
 	}
 
 	/** Metodo per produrre una stringa contenente un numero dato di elementi uguali (char)
