@@ -70,6 +70,7 @@ public class MyMenu {
 		
 		int i;
 		
+		System.out.println("");
 		System.out.println(CORNICE_SUPERIORE);
 		System.out.print(CORNICE_VERTICALE);
 		
