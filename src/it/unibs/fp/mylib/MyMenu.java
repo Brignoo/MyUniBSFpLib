@@ -40,7 +40,7 @@ public class MyMenu {
 	  
 		stampaMenu();
 	
-		return InputDati.leggiIntero(RICHIESTA_INSERIMENTO, 0, voci.length);	 
+		return MyInputDati.leggiIntero(RICHIESTA_INSERIMENTO, 0, voci.length);	 
 	}
 	
 	/** Metodo per il calcolo della lunghezza della cornice del menu
